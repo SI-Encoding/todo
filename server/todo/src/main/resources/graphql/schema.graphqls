@@ -1,0 +1,14 @@
+type Query {
+  getList: [Tasks]
+}
+
+type Mutation {
+  createTask(name: String!, notes: String!, dueDate: String, isComplete: Boolean!) : Tasks!
+}
+
+type Tasks {
+  name: String!
+  notes: String!
+  dueDate: String!
+  isComplete: Boolean!
+}

@@ -3,12 +3,13 @@ type Query {
 }
 
 type Mutation {
-    createTask(name: String!, notes: String!, dueDate: String!, isComplete: Boolean!) : Tasks!
+    createTask(name: String!, notes: String!, dueDate: String!, time: String!, isComplete: Boolean!) : Tasks!
 }
 
 type Tasks {
   name: String!
   notes: String!
   dueDate: String!
+  time: String!
   isComplete: Boolean!
 }

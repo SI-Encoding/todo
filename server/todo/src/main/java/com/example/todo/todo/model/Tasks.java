@@ -8,12 +8,15 @@ public class Tasks {
 
     private String dueDate;
 
+    private String time;
+
     private boolean isComplete;
 
-    public Tasks(String name, String notes, String dueDate, boolean isComplete) {
+    public Tasks(String name, String notes, String dueDate, String time, boolean isComplete) {
         this.name = name;
         this.notes = notes;
         this.dueDate = dueDate;
+        this.time = time;
         this.isComplete = isComplete;
     }
 
@@ -29,10 +32,16 @@ public class Tasks {
 
     }
 
+    public String getTime() {
+        
+        return this.time;
+
+    }
+
     public String getDueDate() {
         
         return this.dueDate;
-        
+
     }
 
     public void setIsComplete(boolean isComplete) {

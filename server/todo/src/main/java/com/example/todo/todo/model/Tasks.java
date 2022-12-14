@@ -17,6 +17,24 @@ public class Tasks {
         this.isComplete = isComplete;
     }
 
+    public String getName() {
+
+        return this.name;
+
+    }
+
+    public String getNotes() {
+        
+        return this.notes;
+
+    }
+
+    public String getDueDate() {
+        
+        return this.dueDate;
+        
+    }
+
     public void setIsComplete(boolean isComplete) {
 
         this.isComplete = isComplete;
@@ -37,4 +55,6 @@ public class Tasks {
         return this.isComplete;
 
     }
+
+   
 }

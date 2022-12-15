@@ -25,8 +25,16 @@ public class TasksController {
     }
 
     @MutationMapping
-    public Tasks createTask(@Argument("name") String name, @Argument("notes") String notes, @Argument("dueDate") String dueDate, @Argument("time") String time, @Argument("isComplete") Boolean isComplete) {
-         tasksRepository.addToList(new Tasks(name, notes, dueDate, time, isComplete));
-        return tasksRepository.getTask(tasksRepository.taskSize()-1);
+    public Tasks createTask(@Argument("id") int id, @Argument("name") String name, @Argument("notes") String notes, @Argument("dueDate") String dueDate, @Argument("time") String time, @Argument("isComplete") Boolean isComplete) {
+         tasksRepository.addToList(new Tasks(id, name, notes, dueDate, time, isComplete));
+        return tasksRepository.getTaskById(id);
     }
+
+    @MutationMapping
+    public Tasks taskCompleted(@Argument("id") int id, @Argument("isComplete") Boolean isComplete) {
+         Tasks task = tasksRepository.getTaskById(id);
+         task.setIsComplete(true);
+        return tasksRepository.getTaskById(id);
+    }
+
 }

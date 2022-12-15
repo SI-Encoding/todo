@@ -32,7 +32,15 @@ public class TasksRepository {
 
     public Tasks getTask(int i) {
         return tasks.get(i);
+    }
 
+    public Tasks getTaskById(int id) {
+        for(Tasks task : tasks) { 
+            if(task.getId()==id) { 
+            return task;
+            }
+         }
+         return tasks.get(0);
     }
 
     public List<Tasks> getList() {

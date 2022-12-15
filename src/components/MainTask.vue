@@ -2,6 +2,7 @@
 import { useQuery } from '@vue/apollo-composable'
 import { useMutation } from '@vue/apollo-composable'
 import { CREATE_TASK_MUTATION } from '../graphql/mutation/createTask'
+import { TASK_COMPLETED_MUTATION } from '../graphql/mutation/taskCompleted'
 import { GET_ALL_TASKS_QUERY } from '../graphql/queries/getList'
 
 export default {
@@ -26,11 +27,28 @@ export default {
       })
 
       createTask({
+        id: Math.ceil(Math.random()*1000000), 
         name: this.taskName,
         notes: this.taskNote,
         dueDate: this.taskDate,
         time: this.taskTime,
         isComplete: false
+      },
+        onDone(result => {
+          console.log(result.data)
+        })
+      )
+    },
+
+    async completed(id) {
+
+      const { mutate: taskCompleted, onDone } = useMutation(TASK_COMPLETED_MUTATION, {
+        refetchQueries: [{ query: GET_ALL_TASKS_QUERY }],
+      })
+
+      taskCompleted({
+        id: id,
+        isComplete: true
       },
         onDone(result => {
           console.log(result.data)
@@ -108,17 +126,42 @@ export default {
         </div>
       </div>
     </div>
+  </div>  
+  <section class="container-md">
+    <div class="accordion" id="accordionExample">
+  <div class="accordion-item" v-for="task of result.getList" :key="task.id">
+    <h2 class="accordion-header d-flex" :id="task.id">
+      <button class="accordion-button" :class="task.isComplete ? 'complete':'incomplete'" type="button" data-bs-toggle="collapse" :data-bs-target="'#collapseOne' + task.id" aria-expanded="true" aria-controls="collapseOne">
+        <span class="me-auto">Task: {{ task.name }}</span> <span class="ms-auto"> Due Date: {{task.dueDate}}</span> <span class="ms-3">{{task.time}}</span>
+      </button>
+      <button class="btn btn-warning" @click="completed(task.id)" v-if="!task.isComplete">Incomplete<i class="bi bi-x-square-fill"></i></button>
+      <button class="btn btn-success" @click="completed(task.id)" v-else>Completed<i class="bi bi-check"></i></button>
+      <button class="btn btn-danger">Remove Task</button>
+    </h2>
+    <div :id="'collapseOne' + task.id" class="accordion-collapse collapse" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
+      <div class="accordion-body">
+        <strong>Details: {{ task.notes }}.</strong> 
+      </div>
+    </div>
   </div>
-  <ul>
-    <li v-for="task of result.getList" :key="task.name">
-      {{ task.name }}
-    </li>
-  </ul>
+</div>
+  </section>
+  
 </template>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
 .hero {
   height: 345px;
+}
+.complete {
+  background: chartreuse;
+}
+.incomplete {
+  background: blanchedalmond;
+}
+
+.accordion-button:not(.collapsed) {
+  color: #212529;
 }
 </style>

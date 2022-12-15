@@ -33,7 +33,7 @@ public class TasksController {
     @MutationMapping
     public Tasks taskCompleted(@Argument("id") int id, @Argument("isComplete") Boolean isComplete) {
          Tasks task = tasksRepository.getTaskById(id);
-         task.setIsComplete(true);
+         task.setIsComplete(isComplete);
         return tasksRepository.getTaskById(id);
     }
 

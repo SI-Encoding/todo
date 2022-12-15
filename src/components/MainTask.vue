@@ -40,15 +40,14 @@ export default {
       )
     },
 
-    async completed(id) {
+    async completed(id, isComplete) {
 
       const { mutate: taskCompleted, onDone } = useMutation(TASK_COMPLETED_MUTATION, {
         refetchQueries: [{ query: GET_ALL_TASKS_QUERY }],
       })
-
       taskCompleted({
         id: id,
-        isComplete: true
+        isComplete: isComplete ? false:true
       },
         onDone(result => {
           console.log(result.data)
@@ -134,8 +133,8 @@ export default {
       <button class="accordion-button" :class="task.isComplete ? 'complete':'incomplete'" type="button" data-bs-toggle="collapse" :data-bs-target="'#collapseOne' + task.id" aria-expanded="true" aria-controls="collapseOne">
         <span class="me-auto">Task: {{ task.name }}</span> <span class="ms-auto"> Due Date: {{task.dueDate}}</span> <span class="ms-3">{{task.time}}</span>
       </button>
-      <button class="btn btn-warning" @click="completed(task.id)" v-if="!task.isComplete">Incomplete<i class="bi bi-x-square-fill"></i></button>
-      <button class="btn btn-success" @click="completed(task.id)" v-else>Completed<i class="bi bi-check"></i></button>
+      <button class="btn btn-warning" @click="completed(task.id, task.isComplete)" v-if="!task.isComplete">Incomplete<i class="bi bi-x-square-fill"></i></button>
+      <button class="btn btn-success" @click="completed(task.id, task.isComplete)" v-else>Completed<i class="bi bi-check"></i></button>
       <button class="btn btn-danger">Remove Task</button>
     </h2>
     <div :id="'collapseOne' + task.id" class="accordion-collapse collapse" aria-labelledby="headingOne" data-bs-parent="#accordionExample">

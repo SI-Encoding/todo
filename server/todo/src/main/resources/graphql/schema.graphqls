@@ -5,6 +5,7 @@ type Query {
 type Mutation {
     createTask(id: ID!, name: String!, notes: String!, dueDate: String!, time: String!, isComplete: Boolean!) : Tasks!
     taskCompleted(id: ID!, isComplete: Boolean!): Tasks!
+    removeTask(id: ID!): Tasks!
 }
 
 type Tasks {

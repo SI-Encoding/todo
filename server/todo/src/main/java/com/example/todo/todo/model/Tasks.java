@@ -2,7 +2,7 @@ package com.example.todo.todo.model;
 
 public class Tasks {
 
-    private int id;
+    private String id;
     
     private String name;
 
@@ -14,7 +14,7 @@ public class Tasks {
 
     private boolean isComplete;
 
-    public Tasks(int id, String name, String notes, String dueDate, String time, boolean isComplete) {
+    public Tasks(String id, String name, String notes, String dueDate, String time, boolean isComplete) {
         this.id = id;
         this.name = name;
         this.notes = notes;
@@ -23,11 +23,11 @@ public class Tasks {
         this.isComplete = isComplete;
     }
 
-    public int getId() {
+    public String getId() {
     
         return this.id;
     }
-    
+
     public String getName() {
 
         return this.name;

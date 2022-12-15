@@ -36,9 +36,9 @@ public class TasksControllerTest {
 
     @BeforeEach
     void setUp() {
-        tasks.add(new Tasks(1, "Pick up the trash", "This Thursday", "2022-05-05", "20:36", false));
-        tasks.add(new Tasks(2, "Finish assigment", "Research economics 101 Supply & Demand", "2022-05-05", "8:36", false));
-        tasks.add(new Tasks(3, "Water garden", "Make sure to extra water the sunflowers", "2022-05-05", "9:36", false));
+        tasks.add(new Tasks("1", "Pick up the trash", "This Thursday", "2022-05-05", "20:36", false));
+        tasks.add(new Tasks("2", "Finish assigment", "Research economics 101 Supply & Demand", "2022-05-05", "8:36", false));
+        tasks.add(new Tasks("3", "Water garden", "Make sure to extra water the sunflowers", "2022-05-05", "9:36", false));
     }
 
     @Test

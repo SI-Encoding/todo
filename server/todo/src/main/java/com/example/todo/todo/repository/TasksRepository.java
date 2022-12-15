@@ -7,8 +7,6 @@ import org.springframework.stereotype.Repository;
 
 import com.example.todo.todo.model.Tasks;
 
-import jakarta.annotation.PostConstruct;
-
 @Repository
 public class TasksRepository {
 
@@ -34,9 +32,9 @@ public class TasksRepository {
         return tasks.get(i);
     }
 
-    public Tasks getTaskById(int id) {
+    public Tasks getTaskById(String id) {
         for(Tasks task : tasks) { 
-            if(task.getId()==id) { 
+            if(task.getId().equals(id)) { 
             return task;
             }
          }
@@ -45,12 +43,5 @@ public class TasksRepository {
 
     public List<Tasks> getList() {
         return tasks;
-    }
-
-    // @PostConstruct
-    // private void init() {
-    //     tasks.add(new Tasks("Pick up the trash", "This Thursday", "2022-05-05", false));
-    //     tasks.add(new Tasks("Pick up ", "This Thursday", "2022-05-05", false));
-    // }
-    
+    } 
 }

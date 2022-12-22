@@ -64,19 +64,23 @@ export default {
       removeTask({
         id
       }),
-        onDone(result =>
+        onDone(result => {
           console.log(result.data)
-        )
+        })
     }
   },
   setup() {
 
+    try {
     const { result, loading, error } = useQuery(GET_ALL_TASKS_QUERY);
     return {
       result,
       loading,
       error
     }
+   } catch(err) {
+    console.log(err)
+  }
   }
 }
 </script>
